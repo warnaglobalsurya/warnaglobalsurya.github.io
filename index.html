@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance</title>
+</head>
+<body>
+
+<h2>Attendance Form</h2>
+
+<form>
+  <label>Name:</label><br>
+  <input type="text" id="name"><br><br>
+
+  <label>Date:</label><br>
+  <input type="date" id="date"><br><br>
+
+  <label>Type:</label><br>
+  <select id="type">
+    <option value="Check In">Check In</option>
+    <option value="Check Out">Check Out</option>
+  </select><br><br>
+
+  <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<script>
+function submitForm() {
+  const name = document.getElementById("name").value;
+  const date = document.getElementById("date").value;
+  const type = document.getElementById("type").value;
+
+  const now = new Date().toLocaleTimeString();
+
+  alert(name + " - " + date + " - " + type + " - " + now);
+}
+</script>
+<!-- OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: "c44d8767-7b06-4d32-87b0-5ec88947f33e",
+  });
+
+  // paksa tampilkan popup
+  OneSignal.showSlidedownPrompt();
+});
+</script>
+
+</body>
+</html>
