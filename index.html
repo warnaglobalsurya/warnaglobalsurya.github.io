@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <div class='onesignal-customlink-container'></div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="manifest" href="manifest.json" />
+
+  <title>Warna Global Surya</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html {
+      scroll-padding-top: 80px; /* agar offset tidak tertutup header */
+    }
+
+    body {
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      line-height: 1.6;
+      color: #fff;
+      background-color: #000;
+    }
+    .logo {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: logoIn 1s ease-out forwards;
+  }
+  .splash-logo {
+    display: none;
+  }
+
+  .content h2 {
+     line-height: 1;
+     font-size: 50px;
+  }
+
+  /* Animasi keyframe */
+@keyframes logoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+.header-main nav {
+  display: flex;
+  gap: 20px;
+}
+
+
+
+    header h1 {
+      font-size: 24px;
+      color: #00ffcc;
+    }
+    nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+    }
+
+
+    section { 
+      padding: 100px 40px 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      color: rgb(228, 215, 215);
+      text-align: center;
+      min-height: 50vh;
+      font-size: 20px;
+    }
+
+    
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .light-section {
+      background-color: whitesmoke;
+      max-width: 100%;
+      min-height: 100vh;
+  border-radius: 0%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: background-color 0.3s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  color: black
+    }
+    .services {
+      background-color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #777;
+    }
+
+    /* PARALLAX SECTION */
+    .hero-parallax {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)),
+                    url("assets/Background.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 130vh;
+      z-index: 1;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .hero-parallax .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: rgb(212, 212, 211);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .hero-parallax::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.1); /* overlay gelap */
+      z-index: 1;
+    }
+    .menu-toggle {
+  display: none;
+ 
+}
+#scrollToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 32px;
+  background: none;
+  border: none;
+  color: var(--text-color); /* default: putih atau hitam */
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, color 0.3s ease;
+  z-index: 9999;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+#scrollToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#scrollToTop:hover {
+  transform: scale(1.2);
+}
+#scrollToTop.dark-icon {
+  color: #000; /* hitam untuk background terang */
+}
+
+
+    @media (max-width: 932px) {
+
+      header h1 {
+      font-size: 20px;
+   }
+
+   .hero-parallax {
+    height: 100vh;
+   }
+
+    .content h2 {
+     line-height: 1;
+     font-size: 40px;
+  }
+
+   section {
+    text-align: left;
+    font-size: 5px;
+   } 
+
+  #splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: whitesmoke; /* akan ditimpa berdasarkan preferensi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s ease;
+}
+
+/* Logo animasi */
+.splash-logo {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: logoIn 1s ease-out forwards;
+}
+
+/* Animasi keyframe */
+@keyframes logoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+   .header-main {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 20px;
+  }
+
+  .header-main nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    background-color: #111;
+    width: max-content;
+    min-width: 150px;
+    padding: 10px 0;
+    border-radius: 8px 0 0 8px;
+    box-shadow: -4px 4px 10px rgba(0,0,0,0.4);
+    z-index: 999;
+  }
+
+  
+  .menu-toggle {
+    display: block;
+    font-size: 26px;
+    color: white;
+    background: none;
+    border: none;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  button:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+
+
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #111;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 0;
+    border-radius: 6px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+  nav a {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+  
+
+  .hero-parallax .content {
+    font-size: 1.5rem;
+    padding: 0 20px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  section {
+    padding: 80px 20px 40px;
+  }
+
+  .parallax-bg {
+    background-size: cover;
+    height: 100vh;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+  
+  /* --- MODE TERANG (jika sistem pengguna pakai Light Mode) --- */
+@media (prefers-color-scheme: light) {
+ 
+  
+   #splash-screen {
+    background: whitesmoke;
+    color: black;
+  }
+  .header-main nav {
+    background-color: whitesmoke;
+  }
+  .menu-toggle {
+    color: whitesmoke;
+  }
+
+  /* --- GAYA DASAR --- */
+header h1 {
+  color: whitesmoke;
+}
+nav a {
+  color: black !important ;
+}
+nav a:hover {
+  color: var(--accent-color);
+}
+  
+}
+
+/* --- MODE GELAP (jika sistem pengguna pakai Dark Mode) --- */
+@media (prefers-color-scheme: dark) {
+  
+  #splash-screen {
+    background: black;
+    color: whitesmoke;
+  }
+  .header-main nav {
+    background-color: black;
+  }
+  .menu-toggle {
+    color: whitesmoke;
+  }
+
+}
+/* --- GAYA DASAR --- */
+header h1 {
+  color: whitesmoke;
+}
+nav a {
+  color: whitesmoke;
+}
+nav a:hover {
+  color: var(--accent-color);
+}
+
+  
+#scrollToTop {
+ position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 32px;
+  background: none;
+  border: none;
+  color: var(--text-color); /* default adaptif */
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, color 0.3s ease;
+  z-index: 9999;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+#scrollToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#scrollToTop:hover {
+  transform: scale(1.2);
+}
+#scrollToTop:active {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+#scrollToTop.dark-icon {
+  color: #000; /* hitam untuk background terang */
+}
+
+}
+
+
+  </style>
+</head>
+<body>
+  <div id="splash-screen">
+  <div class="splash-logo">Warna Global Surya</div>
+</div>
+
+<!-- ✅ FIXED: tambah id ke section agar <a href="#hero-parallax"> berfungsi -->
+<section id="hero-parallax" class="hero-parallax">
+  <div class="parallax-bg"></div>
+  <div class="content">
+    <h2>ILLUMINATE<br>YOUR<br>VISION</h2>
+  </div>
+</section>
+
+<header>
+   <div class="header-main">
+    <h1 class="logo">Warna Global Surya</h1>
+    
+    <nav>
+    <a class="logo" href="#hero-parallax">Home</a>
+    <a class="logo" href="#about">About</a>
+    <a class="logo" href="https://wgsmaster.glide.page/dl/6471c6">Equipments</a>
+    <a class="logo" href="#contact">Contact</a>
+    <a class="logo" href="https://wgsmaster.glide.page/dl/6471c6/s/4b6ef9" target="_blank" rel="noopener noreferrer">WGS Master</a>
+    </nav>
+
+  <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+  </div>
+ 
+</header>
+
+<section class="section" id="about">
+
+    <h2>About Us</h2>
+    <h2>----------</h2>
+    <p>Our company business is a rental company that provide some equipment in the form of lighting, grip, cloth, and including gaffer team for film production. We have experiences working with several film production companies, be it film, series, or commercial projects.</p>
+    <br>
+    <p>If you either want to cooperation with us to product you project, it will be a pleasure to work with you,</p>
+    <p>please contact us</p>
+  
+  
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <p>Email us at: warnaglobalsupp@gmail.com or call us at 021 5010 6260 (652)</p>
+</section>
+
+<footer>
+  &copy; 2026 Warna Global Surya. All rights reserved.
+</footer>
+<button id="scrollToTop" aria-label="Scroll to top">&#8593;</button>
+
+<script>
+  const bg = document.querySelector('.parallax-bg');
+  const sections = document.querySelectorAll('section');
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function updateEffects() {
+    // Parallax
+    const offset = lastScrollY * 0.4;
+    if (bg) {
+      bg.style.transform = `translate3d(0, ${offset}px, 0)`;
+    }
+
+    // Fade-in effect
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top < trigger) {
+        section.classList.add('visible');
+      }
+    });
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      requestAnimationFrame(updateEffects);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', updateEffects);
+   // Toggle hamburger menu
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('header nav');
+  
+
+  menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+  
+
+  // Auto-close menu after clicking link (mobile)
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+    });
+  });
+  // Jika klik di luar nav/menu → tutup menu
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('hidden');
+    }
+  });
+   const scrollBtn = document.getElementById("scrollToTop");
+
+  // Tampilkan tombol saat scroll ke bawah
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add("show");
+    } else {
+      scrollBtn.classList.remove("show");
+    }
+  });
+
+  // Scroll ke atas saat tombol diklik
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+ /// Observasi semua section terang
+  const observer = new IntersectionObserver(entries => {
+    let isInLightSection = false;
+
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        isInLightSection = true;
+      }
+    });
+
+    scrollBtn.classList.toggle("dark-icon", isInLightSection);
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.light-section').forEach(section => {
+    observer.observe(section);
+  });
+   // Hilangkan splash screen setelah 1 detik
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const splash = document.getElementById('splash-screen');
+      splash.style.opacity = '0';
+      setTimeout(() => splash.style.display = 'none', 500); // Sembunyikan setelah transisi
+    }, 1000);
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(function () {
+          console.log('Service Worker registered');
+        });
+    });
+  }
+</script>
+
+
+</body>
+</html>
